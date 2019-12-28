@@ -1,0 +1,14 @@
+#OS junk files
+[Tt]humbs.db
+*.DS_Store
+
+# Vagrant files
+.vagrant
+control.pub
+*.box%
+
+# Intellij Idea files
+.idea
+
+*.log
+
