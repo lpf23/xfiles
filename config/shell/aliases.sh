@@ -13,11 +13,11 @@ alias apache='cd /usr/local/apache2'
 
 # To temporarily bypass an alias, we preceed the command with a \
 # EG: the ls command is aliased, but to use the normal ls command you would type \ls
-
+alias sudo='sudo -E '                   # leave a space after sudo to avoid ignoring aliases
+alias su='su -p '                       # preserve environment - use wisely
 alias ebrc='edit ~/.bashrc'             # Edit this .bashrc file
 alias path='echo -e ${PATH//:/\\n}'     # path:     Echo all executable Paths
 alias da="date +'%G%m%d%H%M%S'"         # date in the format YYYYMMDDHHMMSS (ISO 8601)
-alias su="sudo -E $(command -v bash)"   # sudo alias
 
 alias cp='cp -iv'                   # Preferred 'cp' implementation
 alias mv='mv -iv'                   # Preferred 'mv' implementation
@@ -50,10 +50,10 @@ alias countfiles="for t in files links directories; do echo \`find . -type \${t:
 alias fix_stty='stty sane'          # fix_stty:   Restore terminal settings when screwed up
 alias ps="ps -ef | grep "
 alias kill='kill -9'                # kill:     Preferred 'kill' implementation
-mine() { ps "$@" -u "$USER" -o pid,%cpu,%mem,start,time,bsdtime,command; }
-alias memHogs='/bin/ps wwaxm -o pid,stat,vsize,rss,time,command | head -10'
-alias cpuHogs='/bin/ps wwaxr -o pid,stat,%cpu,time,command | head -10'
-alias topcpu="/bin/ps -eo pcpu,pid,user,args | sort -k 1 -r | head -10"
+mine() { \ps "$@" -u "$USER" -o pid,%cpu,%mem,start,time,bsdtime,command; }
+alias memHogs='\ps wwaxm -o pid,stat,vsize,rss,time,command | head -10'
+alias cpuHogs='\ps wwaxr -o pid,stat,%cpu,time,command | head -10'
+alias topcpu="\ps -eo pcpu,pid,user,args | sort -k 1 -r | head -10"
 
 alias ping='ping -c 10'
 alias less='less -R'

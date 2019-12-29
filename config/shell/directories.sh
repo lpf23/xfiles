@@ -20,10 +20,11 @@ else
     --time-style=+'%G/%m/%d %T'"
 fi
 
-cd() {
-  builtin cd "$@"
-  ll
-}
+# ll after cd
+#cd() {
+#  builtin cd "$@"
+#  ll
+#}
 
 # Alias's for multiple directory listing commands
 alias la='ls -Alh' # show hidden files

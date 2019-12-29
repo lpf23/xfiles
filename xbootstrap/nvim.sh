@@ -17,8 +17,15 @@ _mainScript_() {
   esac
 
   header "Installing neovim"
-  _execute_ "curl -sSL \"${stableUrl}/${file}\" \
+  _execute_ -q "curl -sSL \"${stableUrl}/${file}\" \
     | tar -C \"${HOME}/xfiles/nvim\" -xz --strip-components=1 -f -"
+  _execute_ -q "mkdir ${HOME}/xfiles/nvim/backup"
+  _execute_ -q "mkdir ${HOME}/xfiles/nvim/undo"
+
+  # hard-code the path for nvim in editors.sh...
+  # there may be other ways to handle this, but I am doing this to avoid `sudo -E nvim` from creating /root/xfiles
+  _execute_ -q "sed -i 's;~/xfiles;${HOME}/xfiles;' ${HOME}/xfiles/config/shell/editors.sh"
+  _execute_ -q "sed -i 's;~/xfiles;${HOME}/xfiles;' ${HOME}/xfiles/nvim/init.vim"
 
 } # end _mainScript_
 

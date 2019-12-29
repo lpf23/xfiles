@@ -15,15 +15,15 @@ _mainScript_() {
 
   _makeTempDir_
   header "Installing bash-completions"
-  _execute_ "curl -sSL \"${bashCompletionUrl}\" | tar -C \"${tmpDir}\" -xJ --strip-components=1"
-  _execute_ "cd \"${tmpDir}\""
-  _execute_ "./configure --prefix=\"${destDir}\""
-  _execute_ "make && make install"
+  _execute_ -q "curl -sSL \"${bashCompletionUrl}\" | tar -C \"${tmpDir}\" -xJ --strip-components=1"
+  _execute_ -q "cd \"${tmpDir}\""
+  _execute_ -q "./configure --prefix=\"${destDir}\""
+  _execute_ -q "make && make install"
 
   [ -d "${destDir}/share/bash-completion/completions" ] || fatal "completions directory missing"
 
   for extra in "${!extras[@]}"; do
-    _execute_ "curl -sSL -o \"${destDir}\"/share/bash-completion/completions/\"${extra}\" \"${extras[${extra}]}\"" \
+    _execute_ -q "curl -sSL -o \"${destDir}\"/share/bash-completion/completions/\"${extra}\" \"${extras[${extra}]}\"" \
       || fatal "Failed to download: ${extras[${extra}]}"
   done
 

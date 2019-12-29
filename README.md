@@ -75,11 +75,12 @@ This will not affect the system's default version (if installed), it is all cont
 
 ## rbenv
 
-Easily install and manage ruby + gems in `~/xfiles/config/rbenv`.
+Easily install and manage ruby + gems in `~/xfiles/config/rbenv` (see Gemfile and gemrc in config/dotfiles)
 
-     $> rbenv install 2.6.5
-     $> rbenv global 2.6.5
-     $> gem install colorls
+     $> rbenv install
+     $> gem install bundler
+     $> bundle install
+     $> source ~/.bashrc    # ll alias uses colorls gem
 
 ## TLDR
 

@@ -117,8 +117,8 @@ if has('mouse')
 endif
 
 " UNDO Directory
-if !isdirectory($HOME . "/xfiles/nvim/undo")
-    call mkdir($HOME . "/xfiles/nvim/undo", "p")
+if !isdirectory("~/xfiles/nvim/undo")
+    call mkdir("~/xfiles/nvim/undo", "p")
 endif
 
 set undodir=~/xfiles/nvim/undo " Set the undo directory
@@ -127,8 +127,8 @@ set undolevels=100
 set undoreload=1000
 
 " BACKUP Directory
-if !isdirectory($HOME . "/xfiles/nvim/backup")
-    call mkdir($HOME . "/xfiles/nvim/backup", "p")
+if !isdirectory("~/xfiles/nvim/backup")
+    call mkdir("~/xfiles/nvim/backup", "p")
 endif
 set backupdir=~/xfiles/nvim/backup
 set directory=~/xfiles/nvim/backup
@@ -169,7 +169,7 @@ nnoremap <Leader>pb :CtrlPBuffer<CR>
 " Function keys
 nnoremap <silent> <F2> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 nnoremap <F3> :set hlsearch!<CR>
-nnoremap <F5> :source $HOME/xfiles/nvim/init.vim<CR>
+nnoremap <F5> :source ~/xfiles/nvim/init.vim<CR>
 nnoremap <F6> :NERDTreeToggle<CR>
 nnoremap <F7> :UndotreeToggle<CR>
 nnoremap <F8> :ColorToggle<CR>

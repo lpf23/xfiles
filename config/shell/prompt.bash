@@ -1,118 +1,112 @@
 #alias cpu="grep 'cpu ' /proc/stat | awk '{usage=(\$2+\$4)*100/(\$2+\$4+\$5)} END {print usage}' | awk '{printf(\"%.1f\n\", \$1)}'"
 function __setprompt
 {
-	local LAST_COMMAND=$? # Must come first!
+  local LAST_COMMAND=$? # Must come first!
 
-	# Define colors
-	local LIGHTGRAY="\033[0;37m"
-	local WHITE="\033[1;37m"
-	local BLACK="\033[0;30m"
-	local DARKGRAY="\033[1;30m"
-	local RED="\033[0;31m"
-	local LIGHTRED="\033[1;31m"
-	local GREEN="\033[0;32m"
-	local LIGHTGREEN="\033[1;32m"
-	local BROWN="\033[0;33m"
-	local YELLOW="\033[1;33m"
-	local BLUE="\033[0;34m"
-	local LIGHTBLUE="\033[1;34m"
-	local MAGENTA="\033[0;35m"
-	local LIGHTMAGENTA="\033[1;35m"
-	local CYAN="\033[0;36m"
-	local LIGHTCYAN="\033[1;36m"
-	local NOCOLOR="\033[0m"
+  # Define colors
+  local LIGHTGRAY="\033[0;37m"
+  local WHITE="\033[1;37m"
+  local BLACK="\033[0;30m"
+  local DARKGRAY="\033[1;30m"
+  local RED="\033[0;31m"
+  local LIGHTRED="\033[1;31m"
+  local GREEN="\033[0;32m"
+  local LIGHTGREEN="\033[1;32m"
+  local BROWN="\033[0;33m"
+  local YELLOW="\033[1;33m"
+  local BLUE="\033[0;34m"
+  local LIGHTBLUE="\033[1;34m"
+  local MAGENTA="\033[0;35m"
+  local LIGHTMAGENTA="\033[1;35m"
+  local CYAN="\033[0;36m"
+  local LIGHTCYAN="\033[1;36m"
+  local NOCOLOR="\033[0m"
 
-	# Show error exit code if there is one
-	if [[ $LAST_COMMAND != 0 ]]; then
-		# PS1="\[${RED}\](\[${LIGHTRED}\]ERROR\[${RED}\])-(\[${LIGHTRED}\]Exit Code \[${WHITE}\]${LAST_COMMAND}\[${RED}\])-(\[${LIGHTRED}\]"
-		PS1="\[${DARKGRAY}\](\[${LIGHTRED}\]ERROR\[${DARKGRAY}\])-(\[${RED}\]Exit Code \[${LIGHTRED}\]${LAST_COMMAND}\[${DARKGRAY}\])-(\[${RED}\]"
-		if [[ $LAST_COMMAND == 1 ]]; then
-			PS1+="General error"
-		elif [ $LAST_COMMAND == 2 ]; then
-			PS1+="Missing keyword, command, or permission problem"
-		elif [ $LAST_COMMAND == 126 ]; then
-			PS1+="Permission problem or command is not an executable"
-		elif [ $LAST_COMMAND == 127 ]; then
-			PS1+="Command not found"
-		elif [ $LAST_COMMAND == 128 ]; then
-			PS1+="Invalid argument to exit"
-		elif [ $LAST_COMMAND == 129 ]; then
-			PS1+="Fatal error signal 1"
-		elif [ $LAST_COMMAND == 130 ]; then
-			PS1+="Script terminated by Control-C"
-		elif [ $LAST_COMMAND == 131 ]; then
-			PS1+="Fatal error signal 3"
-		elif [ $LAST_COMMAND == 132 ]; then
-			PS1+="Fatal error signal 4"
-		elif [ $LAST_COMMAND == 133 ]; then
-			PS1+="Fatal error signal 5"
-		elif [ $LAST_COMMAND == 134 ]; then
-			PS1+="Fatal error signal 6"
-		elif [ $LAST_COMMAND == 135 ]; then
-			PS1+="Fatal error signal 7"
-		elif [ $LAST_COMMAND == 136 ]; then
-			PS1+="Fatal error signal 8"
-		elif [ $LAST_COMMAND == 137 ]; then
-			PS1+="Fatal error signal 9"
-		elif [ $LAST_COMMAND -gt 255 ]; then
-			PS1+="Exit status out of range"
-		else
-			PS1+="Unknown error code"
-		fi
-		PS1+="\[${DARKGRAY}\])\[${NOCOLOR}\]\n"
-	else
-		PS1=""
-	fi
+  # Show error exit code if there is one
+  if [[ $LAST_COMMAND != 0 ]]; then
+    # PS1="\[${RED}\](\[${LIGHTRED}\]ERROR\[${RED}\])-(\[${LIGHTRED}\]Exit Code \[${WHITE}\]${LAST_COMMAND}\[${RED}\])-(\[${LIGHTRED}\]"
+    PS1="\[${DARKGRAY}\](\[${LIGHTRED}\]ERROR\[${DARKGRAY}\])-(\[${RED}\]Exit Code \[${LIGHTRED}\]${LAST_COMMAND}\[${DARKGRAY}\])-(\[${RED}\]"
+    if [[ $LAST_COMMAND == 1 ]]; then
+      PS1+="General error"
+    elif [ $LAST_COMMAND == 2 ]; then
+      PS1+="Missing keyword, command, or permission problem"
+    elif [ $LAST_COMMAND == 126 ]; then
+      PS1+="Permission problem or command is not an executable"
+    elif [ $LAST_COMMAND == 127 ]; then
+      PS1+="Command not found"
+    elif [ $LAST_COMMAND == 128 ]; then
+      PS1+="Invalid argument to exit"
+    elif [ $LAST_COMMAND == 129 ]; then
+      PS1+="Fatal error signal 1"
+    elif [ $LAST_COMMAND == 130 ]; then
+      PS1+="Script terminated by Control-C"
+    elif [ $LAST_COMMAND == 131 ]; then
+      PS1+="Fatal error signal 3"
+    elif [ $LAST_COMMAND == 132 ]; then
+      PS1+="Fatal error signal 4"
+    elif [ $LAST_COMMAND == 133 ]; then
+      PS1+="Fatal error signal 5"
+    elif [ $LAST_COMMAND == 134 ]; then
+      PS1+="Fatal error signal 6"
+    elif [ $LAST_COMMAND == 135 ]; then
+      PS1+="Fatal error signal 7"
+    elif [ $LAST_COMMAND == 136 ]; then
+      PS1+="Fatal error signal 8"
+    elif [ $LAST_COMMAND == 137 ]; then
+      PS1+="Fatal error signal 9"
+    elif [ $LAST_COMMAND -gt 255 ]; then
+      PS1+="Exit status out of range"
+    else
+      PS1+="Unknown error code"
+    fi
+    PS1+="\[${DARKGRAY}\])\[${NOCOLOR}\]\n"
+  else
+    PS1=""
+  fi
 
-	# Date
-	PS1+="\[${DARKGRAY}\][\[${RED}\]\$(date +%b-'%-m')" # Date
-	PS1+="\[${RED} $(date +'%-I':%M:%S%P)\[${DARKGRAY}\]]-" # Time
+  # Date
+  PS1+="\[${SVIOLET}\][\[${CYAN}\]\$(date +%b.'%-m')" # Date
+  PS1+="\[${SBLUE} $(date +'%H:%M')\[${SVIOLET}\]]-" # Time
 
-	# CPU
-	#PS1+="[\[${LIGHTGRAY}\]CPU $(cpu)%"
+  # [CPU]-
+  #PS1+="\[${SVIOLET}\][\[${SMAGENTA}\]$(cpu)%"
+  #PS1+="\[${SVIOLET}\]]-"
 
-	# Jobs
-	#PS1+="\[${DARKGRAY}\]:\[${MAGENTA}\]\j"
+  # User and server
+  local SSH_IP=`echo $SSH_CLIENT | awk '{ print $1 }'`
+  local SSH2_IP=`echo $SSH2_CLIENT | awk '{ print $1 }'`
+  if [ $SSH2_IP ] || [ $SSH_IP ] ; then
+    # [user
+    PS1+="\[${SVIOLET}\][\[${SPURPLE}\]\u"
+    # @host]-
+    PS1+="\[${SVIOLET}\]@\[${SMAGENTA}\]\h\[${SVIOLET}\]]-"
+  else
+    # [user]-
+    PS1+="\[${SVIOLET}\][\[${SPURPLE}\]\u\[${SVIOLET}\]]-"
+  fi
 
-	# Network Connections (for a server - comment out for non-server)
-	#PS1+="\[${DARKGRAY}\]:\[${MAGENTA}\]Net $(awk 'END {print NR}' /proc/net/tcp)"
-
-	#PS1+="\[${DARKGRAY}\]]-"
-
-	# User and server
-	local SSH_IP=`echo $SSH_CLIENT | awk '{ print $1 }'`
-	local SSH2_IP=`echo $SSH2_CLIENT | awk '{ print $1 }'`
-	if [ $SSH2_IP ] || [ $SSH_IP ] ; then
-		PS1+="[\[${BLUE}\]\u\[${DARKGRAY}\]@\[${BLUE}\]\h"
-	else
-		PS1+="[\[${BLUE}\]\u"
-	fi
-
-	# Current directory
-	PS1+="\[${DARKGRAY}\]:\[${CYAN}\]\w\[${DARKGRAY}\]]"
-
-	# Total size of files in current directory
-	#PS1+="[\[${RED}\]$(/bin/ls -lah | /bin/grep -m 1 total | /bin/sed 's/total //')\[${DARKGRAY}\]:"
-
+  # [Current directory]-
+  PS1+="[\[${SGREEN}\]\w\[${SVIOLET}\]]-"
+  # [Total size of files in current directory:
+	PS1+="[\[${SYELLOW}\]$(/bin/ls -lah | /bin/grep -m 1 total | /bin/sed 's/total //')\[${SVIOLET}\]:"
 	# Number of files
-	#PS1+="\[${RED}\]\$(/bin/ls -A -1 | /usr/bin/wc -l)\[${DARKGRAY}\]]"
+	PS1+="\[${SYELLOW}\]\$(/bin/ls -A -1 | /usr/bin/wc -l)\[${SVIOLET}\]]"
+  # Skip to the next line
+  PS1+="\n"
 
-	# Skip to the next line
-	PS1+="\n"
+  if [[ $EUID -ne 0 ]]; then
+    # -> (normal user prompt)
+    PS1+="\[${SGREEN}\]-\[${SGREEN}\]>\[${NOCOLOR}\] "
+  else
+    # >>> (root user prompt)
+    PS1+="\[${SRED}\]>>\[${NOCOLOR}\] " # Root user
+  fi
 
-	if [[ $EUID -ne 0 ]]; then
-		PS1+="\[${DARKGRAY}\]~\[${GREEN}\]>\[${NOCOLOR}\] " # Normal user
-	else
-		PS1+="\[${DARKGRAY}\]\[${RED}\]>>\[${NOCOLOR}\] " # Root user
-	fi
-
-	# PS2 is used to continue a command using the \ character
-	PS2="\[${DARKGRAY}\]>\[${NOCOLOR}\] "
-
-	# PS3 is used to enter a number choice in a script
-	PS3='Please enter a number from above list: '
-
-	# PS4 is used for tracing a script in debug mode
-	PS4='\[${DARKGRAY}\]+\[${NOCOLOR}\] '
-}
+  # PS2 is used to continue a command using the \ character
+  PS2="\[${SGREEN}\]>\[${NOCOLOR}\] "
+  # PS3 is used to enter a number choice in a script
+  PS3='Please enter a number from above list: '
+  # PS4 is used for tracing a script in debug mode
+  PS4="\[${SPURPLE}\]+\[${NOCOLOR}\] "
+  }
 PROMPT_COMMAND='__setprompt'

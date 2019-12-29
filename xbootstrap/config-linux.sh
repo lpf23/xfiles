@@ -22,9 +22,15 @@ _mainScript_() {
     # Set the package manager based on linuxFlavor
     if [[ "$linuxFlavor" == "CentOS Linux" ]]; then
       packageManager="sudo yum "
+      networkTools="bind-utils"
+      shellCheck="ShellCheck"
+      devPackages="openssl-devel zlib-devel readline-devel"
       javaPackage="java-11-openjdk-devel"
     elif [[ "$linuxFlavor" == "Ubuntu" ]]; then
       packageManager="sudo apt-get "
+      networkTools="dnsutils"
+      shellCheck="shellcheck"
+      devPackages="libssl-dev"
       javaPackage="default-jre"
     else
       fatal "PackageManager not supported for ${linuxFlavor}" ${LINENO}
@@ -56,7 +62,7 @@ _mainScript_() {
     header "Installing Git stuff" # Git Stuff
     _execute_ -qp "${packageManager} install -y git git-extras"
     header "Installing Network Tools" # Network Tools
-    _execute_ -qp "${packageManager} install -y bind-utils"  # dnsutils equivalent in ubuntu
+    _execute_ -qp "${packageManager} install -y ${networkTools}"  # dnsutils equivalent in ubuntu
     header "Installing System Tools" # System Tools
     _execute_ -qp "${packageManager} install -y coreutils htop"
     header "Installing Zip Tools" # Zip Tools
@@ -68,13 +74,11 @@ _mainScript_() {
       header "Installing development tools"
       _execute_ -qp "${packageManager} install -y autoconf automake"
       _execute_ -qp "${packageManager} install -y gcc"           # needed to build rbenv extension, but not required
-      _execute_ -qp "${packageManager} install -y openssl-devel"
+      _execute_ -qp "${packageManager} install -y ${devPackages}"
       _execute_ -qp "${packageManager} install -y jpegoptim optipng pngcrush"
       _execute_ -qp "${packageManager} install -y python python3 python3-pip"
-      _execute_ -qp "${packageManager} install -y ShellCheck"
+      _execute_ -qp "${packageManager} install -y ${shellCheck}"
       _execute_ -qp "${packageManager} install -y source-highlight"
-      _execute_ -qp "${packageManager} install -y readline-devel"
-      _execute_ -qp "${packageManager} install -y zlib-devel"
     fi
 
     if ! _seekConfirmation_ "Install Java?"; then return; fi
@@ -95,15 +99,15 @@ _mainScript_() {
     # DESC:   Installs neovim in ~/xfiles/nvim
     # ARGS:   None
     # OUTS:   None
-    [[ -f ${HOME}/xfiles/nvim/bin/nvim ]] || _execute_ -vs "${HOME}/xfiles/xbootstrap/nvim.sh"
+    [[ -f ${HOME}/xfiles/nvim/bin/nvim ]] || _execute_ -qs "${HOME}/xfiles/xbootstrap/nvim.sh"
   }
   ##################################################################
   _setupRbenv_() {
     # DESC:   Installs prettyping in ~/xfiles/config/rbenv
     # ARGS:   None
     # OUTS:   None
-    if [[ ! -f ${HOME}/xfiles/config/rbenv/ ]]; then
-      _execute_ -vs "${HOME}/xfiles/xbootstrap/rbenv.sh"
+    if [[ ! -d ${HOME}/xfiles/config/rbenv ]]; then
+      _execute_ -qs "${HOME}/xfiles/xbootstrap/rbenv.sh"
     fi
   }
   ##################################################################
@@ -112,8 +116,9 @@ _mainScript_() {
     # ARGS:   None
     # OUTS:   None
     if [[ ! -f ${HOME}/xfiles/bin/tldr ]]; then
+      header "Installing TLDR"
       _execute_ -q "curl -o \"${HOME}\"/xfiles/bin/tldr https://raw.githubusercontent.com/raylee/tldr/master/tldr"
-      _execute_ -vs "chmod +x \"${HOME}\"/xfiles/bin/tldr"
+      _execute_ -qs "chmod +x \"${HOME}\"/xfiles/bin/tldr"
     fi
   }
   ##################################################################
@@ -122,8 +127,9 @@ _mainScript_() {
     # ARGS:   None
     # OUTS:   None
     if [[ ! -f ${HOME}/xfiles/bin/prettyping ]]; then
+      header "Installing PrettyPing"
       _execute_ -q "curl -o \"${HOME}\"/xfiles/bin/prettyping https://raw.githubusercontent.com/denilsonsa/prettyping/master/prettyping"
-      _execute_ -vs "chmod +x \"${HOME}\"/xfiles/bin/prettyping"
+      _execute_ -qs "chmod +x \"${HOME}\"/xfiles/bin/prettyping"
     fi
   }
   ##################################################################

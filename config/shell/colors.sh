@@ -81,6 +81,32 @@ if tput setaf 1 &>/dev/null; then
     RED=$(tput setaf 1)
     BLACK=$(tput setaf 233)
     GRAY=$(tput setaf 241)
+
+    #Solarized Colors
+    # (https://github.com/altercation/solarized/tree/master/iterm2-colors-solarized#the-values)
+    SBLACK=$(tput setaf 0)
+    SBLUE=$(tput setaf 33)
+    SCYAN=$(tput setaf 37)
+    SGREEN=$(tput setaf 190)
+    SORANGE=$(tput setaf 172)
+    SPURPLE=$(tput setaf 141)
+    SRED=$(tput setaf 124)
+    SVIOLET=$(tput setaf 61)
+    SMAGENTA=$(tput setaf 9)
+    SWHITE=$(tput setaf 8)
+    SYELLOW=$(tput setaf 136)
+    export SBLACK
+    export SBLUE
+    export SCYAN
+    export SGREEN
+    export SORANGE
+    export SPURPLE
+    export SRED
+    export SVIOLET
+    export SMAGENTA
+    export SWHITE
+    export SYELLOW
+
     #Backgrounds
     BACKORANGE=$(tput setab 172)
     BACKMAGENTA=$(tput setab 9)
@@ -92,7 +118,6 @@ if tput setaf 1 &>/dev/null; then
     BACKBLUE=$(tput setab 38)
     BACKRED=$(tput setab 1)
     BACKGRAY=$(tput setab 241)
-
     export BACKORANGE
     export BACKMAGENTA
     export BACKORANGE

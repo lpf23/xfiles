@@ -13,10 +13,6 @@ umask 002
 # Build PATH and put /usr/local/bin before existing PATH
 export PATH="/usr/local/bin:${PATH}:/usr/local/sbin:${HOME}/bin"
 
-#~~~~~~~~~~~~~~~~~~~~~#
-#		SOURCED SCRIPTS 	#
-#~~~~~~~~~~~~~~~~~~~~~#
-
 # Source global definitions
 [ -f /etc/bashrc ] && . /etc/bashrc
 
@@ -27,7 +23,7 @@ configFileLocations=(
 )
 
 # Set a shell variable so we can customize the config files
-currentShell="$(/usr/bin/ps -p $$ | tail -n 1 | awk -F' ' '{print $4}' | sed 's/-//g')"
+currentShell="$(/bin/ps -p $$ | tail -n 1 | awk -F' ' '{print $4}' | sed 's/-//g')"
 
 for configFileLocation in "${configFileLocations[@]}"; do
   if [ -d "${configFileLocation}" ]; then

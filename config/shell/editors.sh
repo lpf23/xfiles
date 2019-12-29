@@ -1,12 +1,17 @@
 #!/usr/bin/env bash
 
-if [[ -f "${HOME}/xfiles/nvim/bin/nvim" ]]; then
-  export EDITOR="${HOME}/xfiles/nvim/bin/nvim"
-  alias vim='nvim'
-  alias vi='nvim'
-  alias svi='sudo nvim'
-  alias svim='sudo nvim'
-  alias nvm='nvim'
+nvimDir="~/xfiles/nvim/bin/nvim"
+
+if [[ -f "${nvimDir}" ]]; then
+  export EDITOR="${nvimDir}"
+  alias nvim=$EDITOR
+  alias vim=$EDITOR
+  alias vi=$EDITOR
+  alias oldvi='/bin/vi'
+  alias svi="sudo ${EDITOR}"
+  alias svim="sudo ${EDITOR}"
+  alias nvm=$EDITOR
+  alias nv=$EDITOR
 else
   export EDITOR="/usr/bin/vi"
 fi

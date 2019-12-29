@@ -3,26 +3,26 @@
 _mainScript_() {
 
   header "Installing rbenv"
-  _execute_ "git clone https://github.com/rbenv/rbenv.git ${HOME}/xfiles/config/rbenv"
+  _execute_ -q "git clone https://github.com/rbenv/rbenv.git ${HOME}/xfiles/config/rbenv"
 
   # Set these environment variables so rbenv uses xfiles directory
-  _execute_ "export RBENV_ROOT=${HOME}/xfiles/config/rbenv"
-  _execute_ "export RBENV_SHELL=bash"
+  _execute_ -q "export RBENV_ROOT=${HOME}/xfiles/config/rbenv"
+  _execute_ -q "export RBENV_SHELL=bash"
 
   # gcc is needed to compile dynamic bash extension, however this part is not required for rbenv to function
   if type gcc >/dev/null 2>&1; then
-    _execute_ -v "cd ${HOME}/xfiles/config/rbenv"
-    _execute_ -v "src/configure"
-    _execute_ -v "make -C src"
+    _execute_ -q "cd ${HOME}/xfiles/config/rbenv"
+    _execute_ -q "src/configure"
+    _execute_ -q "make -C src"
   fi
 
   # Insert rbenv/bin and rbenv/shims to PATH in bash_profile
-  _execute_ -v "sed -i 's;^export PATH=\";export PATH=\"\$\{HOME\}/xfiles/config/rbenv/bin:;' ${HOME}/xfiles/config/dotfiles/bash_profile"
-  _execute_ -v "sed -i 's;^export PATH=\";export PATH=\"\$\{HOME\}/xfiles/config/rbenv/shims:;'  ${HOME}/xfiles/config/dotfiles/bash_profile"
+  _execute_ -q "sed -i 's;^export PATH=\";export PATH=\"\$\{HOME\}/xfiles/config/rbenv/bin:;' ${HOME}/xfiles/config/dotfiles/bash_profile"
+  _execute_ -q "sed -i 's;^export PATH=\";export PATH=\"\$\{HOME\}/xfiles/config/rbenv/shims:;'  ${HOME}/xfiles/config/dotfiles/bash_profile"
 
   # install ruby-build plugin for rbenv
-  _execute_ "mkdir -p ${HOME}/xfiles/config/rbenv/plugins"
-  _execute_ "git clone https://github.com/rbenv/ruby-build.git ${HOME}/xfiles/config/rbenv/plugins/ruby-build"
+  _execute_ -q "mkdir -p ${HOME}/xfiles/config/rbenv/plugins"
+  _execute_ -q "git clone https://github.com/rbenv/ruby-build.git ${HOME}/xfiles/config/rbenv/plugins/ruby-build"
 
 } # end _mainScript_
 
